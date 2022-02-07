@@ -19,8 +19,7 @@ feature_extractor = ViTFeatureExtractor.from_pretrained(encoder_checkpoint)
 tokenizer = AutoTokenizer.from_pretrained(decoder_checkpoint)
 model = VisionEncoderDecoderModel.from_pretrained(model_checkpoint).to(device)
 
-def predict(image_path):
-    image = Image.open(image_path).convert("RGB")
+def predict(image):
     clean_text = lambda x: x.replace("<|endoftext|>", "").split("\n")[0]
     sample = feature_extractor(image, return_tensors="pt").pixel_values.to(device) 
     caption_ids = model.generate(sample, max_length=50)[0]
@@ -44,7 +43,7 @@ examples = [
 ]
 
 gr.Interface(
-    vit2distilgpt2,
+    predict,
     inputs,
     outputs,
     title=title,
