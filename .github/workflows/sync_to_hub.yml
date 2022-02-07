@@ -17,4 +17,4 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push origin main --force https://gagan3012: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@huggingface.co/spaces/gagan3012/ViTGPT2 
+        run: git push --force https://gagan3012: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@huggingface.co/spaces/gagan3012/ViTGPT2 origin main
